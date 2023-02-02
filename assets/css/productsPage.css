@@ -428,14 +428,6 @@ body{
 }
 /* more-products-lists end */
 /* footer start */
-footer{
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    height: 100px;
-    width: 100%;
-    background: #000;
-}
 .summary{
     background: #FFD62E;
     padding: 20px 0;

@@ -1,93 +1,62 @@
-// $(function() {
-//     // $(".dropdown").hide();
-//     // $("#nav-drop").hover(function() {
-//     //     $(".dropdown").slideToggle();
-//     // })
-//     // $(".category-dropdown").hide();
-//     // $(".category-lists li").click(function(){
-//     //     $(".category-dropdown").show();
-//     // })
-    
+var sliders = document.querySelectorAll(".products-slide-collection");
+var index = 0;
+
+function next() {
+    sliders[index].classList.remove("active");
+    index = (index + 1) % sliders.length;
+    sliders[index].classList.add("active");
+}
+
+function prev() {
+    sliders[index].classList.remove("active");
+    index = (index - 1 + sliders.length) % sliders.length;
+    sliders[index].classList.add("active");
+}
+
+setInterval(next,5000);
+
+// var add_card = document.querySelectorAll(".add-card");
+// add_card.forEach(items=> {
+
+//     items.addEventListener("click",function() {
+//         // let data_id = this.getAttribute('data-id');
+//         let data = {
+//             data_id: this.getAttribute('data-id'),
+//         }
+//         // console.log(data);
+//         $.ajax({
+//             type: "POST",
+//             url: "./shopping_card_api.php",
+//             data: data,
+//             success: function(res){
+//                 console.log(res);
+//             },
+//             error: function(err) {
+//                 console.error(err);
+//             }
+//         })
+//     })
 // })
 
-const buttons = document.querySelectorAll("[data-carousel-button]");
-buttons.forEach(button => {
-    button.addEventListener("click",function() {
-        const offset = button.dataset.carouselButton === "next" ? 1 : -1;
-        const slides = button.closest('[data-carousel]').querySelector("[data-slides]");
-        const activeSlide = slides.querySelector('[data-active]');
-        let newIndex = [...slides.children].indexOf(activeSlide) + offset;
-
-        if(newIndex < 0) newIndex = slides.children.length -1;
-        if(newIndex >= slides.children.length) newIndex = 0;
-        slides.children[newIndex].dataset.active = true;
-        delete activeSlide.dataset.active;
-    })
-})
-
-const shoes = document.querySelector("#Shoes");
-const clothes = document.querySelector("#Clothes");
-const hats = document.querySelector("#hats");
-const bags = document.querySelector("#bags");
-const category = document.querySelectorAll(".category-lists li");
-const cate_clothes = document.querySelector("#cate-clothes")
-const cate_shoes = document.querySelector("#cate-shoes")
-const cate_hats = document.querySelector("#cate-hats")
-const cate_bags = document.querySelector("#cate-bags")
-category.forEach(items=>{
-    console.log(items);
-    items.addEventListener("click",function(){
-        // if(items.addEventListener("mouseover",function() {
-            
-        //     items.style.background = "#FF8F00";
-        // })){
-        //     console.log("mouserover");
-        // } if(items.addEventListener("mouseleave",function() {
-            
-        //     items.style.background = "#fff";
-        // })){
-        //     console.log ("mouserleave")  
-        // }
-        console.log(items.innerText);
-        if(items.innerText == "Clothes") {
-            // clothes.style.display = "block";
-            // hats.style.display = "none";
-            // bags.style.display = "none";
-            // cate_clothes.style.background = "#FF8F00";
-            // cate_shoes.style.background = "#fff";
-            // cate_hats.style.background = "#fff";
-            // cate_bags.style.background = "#fff";
-            console.log("clothes");
-        } else if(items.innerText == "Shoes") {
-            shoes.style.display = "block";
-            clothes.style.display = "none";
-            hats.style.display = "none";
-            bags.style.display = "none";
-            cate_shoes.style.background = "#FF8F00";
-            cate_clothes.style.background = "#fff";
-            cate_hats.style.background = "#fff";
-            cate_bags.style.background = "#fff";
-        } else if(items.innerText == "Hats") {
-            hats.style.display = "block";
-            shoes.style.display = "none";
-            clothes.style.display = "none";
-            bags.style.display = "none";
-            cate_hats.style.background = "#FF8F00";
-            cate_clothes.style.background = "#fff";
-            cate_shoes.style.background = "#fff";
-            cate_bags.style.background = "#fff";
-        } else if(items.innerText == "Bags") {
-            bags.style.display = "block";
-            shoes.style.display = "none";
-            clothes.style.display = "none";
-            hats.style.display = "none";
-            cate_bags.style.background = "#FF8F00";
-            cate_clothes.style.background = "#fff";
-            cate_hats.style.background = "#fff";
-            cate_shoes.style.background = "#fff";
-        }
-    })
-})
-category.forEach(items=>{
-    console.log(items);
-})
+// function fetchShoppingCard(){
+//     // var add_card = document.querySelectorAll(".add-card");
+//     add_card.forEach(items=> {
+//         var data_id = items.getAttribute('data-id');
+//         var data = {
+//             data_id : data_id,
+//         }
+//         console.log(data);
+//         $.ajax({
+//             method: "POST",
+//             url: "./fetchshopping_api.php",
+//             data: data,
+//             success: function(res){
+//                 console.log(res);
+//             },
+//             error: function(err) {
+//                 console.log(err);
+//             }
+//         })
+//     })
+// }
+// fetchShoppingCard();

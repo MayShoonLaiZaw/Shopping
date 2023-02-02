@@ -351,96 +351,74 @@ body{
 .products-animation{
     width: 100%;
     padding: 20px;
+    position: relative;
     box-shadow: 0px 0px 5px #ECECEC;
 }
-.big-product{
-    width: 100%;
-}
-.product-overflow{
-    width: 95%;
-    position: relative;
-    height: 300px;
-}
-.product-collections{
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: 200ms opacity ease-in-out;
-    transition-delay: 200ms;
-}
-.product-collections[data-active]{
-    opacity: 1;
-    transition-delay: 0ms;
-}
-.big-photo{
-    width: 45%;
+.products-slide-collection .products-slide{
+    width: 80%;
     margin: 0 auto;
+    align-items: center;
 }
-.big-img{
+.products-slide-collection{
+    display: none;
+}
+.products-slide-collection.active{
+    display: block;
+}
+.products-slide .products-content{
+    width: 60%;
+    animation:slideContent 1s linear .6s backwards; 
+}
+@keyframes slideContent{
+    0%{
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+}
+.products-slide .products-slide-image{
+    width: 40%;
+    animation:slideImage 1s linear ; 
+}
+@keyframes slideImage{
+    0%{
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+}
+.products-slide .products-slide-image img{
     width: 100%;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    object-fit: cover;
-    background: url(../images//HD-wallpaper-sneakers-hype-jordan-klekt-nike-shoes-stock-x-we-the-new.jpg);
-    height: 300px;
+    height: 400px;
 }
-.big-img1{
-    background: url(../images/base_pick_any_3_20_1_2022_700x933.jpg);
-    width: 100%;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 300px;
+.products-content p{
+    padding: 20px 0;
 }
-.big-img2{
-    width: 100%;
-    background: url(../images/404a6abb20098d09cd0a52da0ce78af2.jpg);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 300px;
-}
-.big-img3{
-    width: 100%;
-    background: url(../images/d29775f4face17e009dadf3cab3c3059.jpg);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 300px;
-}
-.photo-para{
-    width: 45%;
-    align-self: center;
-    margin:0 auto;
-}
-.photo-para p{
-    padding: 20px 0 30px;
-}
-.product-button button{
+.products-content-btn button{
     padding: 10px 20px;
+    background: #FFD62E;
     border:none;
-    background: #FFD62E;
 }
-.product-button button:hover{
-    cursor: pointer;
-    background: #FF8F00;
-}
-.left-icon,.right-icon{
-    width: 2%;
-    color: #fff;
-    align-self: center;
-    text-align: center;
-}
-.big-product i{
-    background: #FFD62E;
-    width: 30px;
-    height: 30px;
-    font-size: 30px;
-}
-.big-product i:hover{
+.products-content-btn button:hover{
     background: #FF8F00;
     cursor: pointer;
+}
+.products-animation .prev,.next{
+    position: absolute;
+    padding: 10px;
+    top: 45%;
+    background: #FFD62E;
+}
+.products-animation .prev i,.next i{
+    font-size: 20px;
+}
+.products-animation .prev:hover,.next:hover{
+    background: #FF8F00;
+    cursor: pointer;
+}
+.products-animation .prev{
+    left: 20px;
+}
+.products-animation .next{
+    right: 20px;
 }
 /* products end */
 /* products-show start */
@@ -477,6 +455,15 @@ body{
 .products-show-img img{
     height: 200px;
     width: 100%;
+}
+.product-button button{
+    padding: 10px 20px;
+    background: #FFD62E;
+    border:none;
+}
+.product-button button:hover{
+    background: #FF8F00;
+    cursor: pointer;
 }
 /* products-show end */
 /* popular-products start */

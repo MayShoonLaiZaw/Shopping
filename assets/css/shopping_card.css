@@ -151,6 +151,9 @@ body{
 }
 .shopping-card-products-lists{
     width: 100%;
+    padding: 20px;
+    box-shadow: 0px 0px 5px #ececec;
+    margin-bottom: 30px;
     text-align: center;
 }
 .shopping-card-products-photo-para{
@@ -205,13 +208,20 @@ body{
 .shopping-card-products-total{
     width: 10%;
 }
+.shopping-card-products-para button{
+
+    margin-top: 30px;
+}
+.shopping-card-products-para i{
+    font-size: 20px;
+    color: #f00;
+    padding-right: 10px;
+}
 /* shopping-card-products end */
 .shopping-card-summary{
     width: 20%;
     padding: 20px;
-    align-self: center;
-    height: 400px;
-    position: relative;
+    height: fit-content;
     box-shadow: 0px 0px 5px #333;
 }
 .shopping-card-summary h3{
@@ -242,6 +252,7 @@ body{
 .shopping-card-summary-total{
     width: 100%;
     padding: 20px 0;
+    border-top: 1px solid #ececec;
 }
 .checkout-button{
     width: 100%;
@@ -254,9 +265,25 @@ body{
 .removeall-btn button{
     background: #f00;
 }
+.removeall-btn i{
+    font-size: 25px;
+    color: #f00;
+}
+.removeall-btn i:hover{
+    cursor: pointer;
+}
+.shopping-card-review{
+    padding: 10px 0;
+}
+a{
+    text-decoration: none;
+    color: #333;
+}
 /* shopping-card end */
 /* footer start */
 .summary{
+    z-index: -1;
+    background-attachment: fixed;
     background: #FFD62E;
     padding: 20px 0;
 }

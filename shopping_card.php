@@ -1,6 +1,39 @@
 <?php 
+session_start();
 require_once "init/classes/Products.php";
-
+if(isset($_POST['add_to_card'])) {
+    if(isset($_SESSION['shopping_card'])) {
+        $item_array_id = array_column($_SESSION['shopping_card'],'items_id');
+        
+        // check $_GET['id']and $item_array_id are set or not
+        if(!in_array($_GET['id'],$item_array_id)) {
+            $count = count($_SESSION['shopping_card']);
+            $item_array = array(
+                'items_id' => $_GET['id'],
+                'items_image' => $_POST['hidden_image'],
+                'items_name' => $_POST['hidden_name'],
+                'items_price' => $_POST['hidden_price'],
+                'items_quantity' => $_POST['quantity'],
+            );
+            $_SESSION['shopping_card'][$count] = $item_array;
+        } else {
+            echo "<script>alert('Items Already Added...')</script>";
+        }
+    } else {
+        // if not isset already items, add items into array
+        $item_array = array(
+            'items_id' => $_GET['id'],
+            'items_image' => $_POST['hidden_image'],
+            'items_name' => $_POST['hidden_name'],
+            'items_price' => $_POST['hidden_price'],
+            'items_quantity' => $_POST['quantity'],
+        );
+        $_SESSION['shopping_card'][0] = $item_array;
+    }
+}
+if(!isset($_SESSION['shopping_card']) ){
+    echo "<script>location.href='index.php';</script>";
+}
 ?>
 
 <!DOCTYPE html>
@@ -28,21 +61,14 @@ require_once "init/classes/Products.php";
                     <nav>
                         <ul class="navbar flex-container">
                             <li><a href="index.php">Home</a></li>
-                            <li id="nav-drop"><a href="#">Popular<i class="fa-solid fa-angle-down"></i></a>
-                                <ul class="dropdown">
-                                    <li><a href="#">Clothes</a></li>
-                                    <li><a href="#">Shoes</a></li>
-                                    <li><a href="#">Hats</a></li>
-                                    <li><a href="#">Bags</a></li>
-                                </ul>
-                            </li>
+                            <li id="nav-drop"><a href="#">Popular</a></li>
                             <li><a href="#">Reviews</a></li>
                             <li><a href="#">Latest</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div class="account-icons">
-                    <a href="sign_in.php"><i class="fa-solid fa-right-to-bracket"></i><a>
+                    <a href="sign_in.php"><i class="fa-solid fa-right-to-bracket"></i></a>
                 </div>
             </div>
         </header>
@@ -56,9 +82,6 @@ require_once "init/classes/Products.php";
                                     <div class="shopping-card-lists-para">
                                         <h2>Shopping Card</h2>
                                     </div>
-                                    <div class="shopping-card-lists-items">
-                                        <h2>2 Items</h2>
-                                    </div>
                                 </div>
                                 <div class="shopping-card-header-lists">
                                     <ul>
@@ -69,94 +92,89 @@ require_once "init/classes/Products.php";
                                     </ul>
                                 </div>
                             </div>
-                            <div class="shopping-card-products">
+                            <div class="shopping-card-products" id="shopping-card-products">
+                            <?php 
+                            $i = 0;
+                            $alltotal=0;
+                                if(!empty($_SESSION['shopping_card'])) {
+                                    $total = 0;
+                                    $i = 0;
+                                    foreach($_SESSION['shopping_card'] as $keys => $values) {
+                                        $i++;
+                                        echo $i;
+                                        
+                                ?>
                                 <div class="shopping-card-products-lists flex-container">
                                     <div class="shopping-card-products-photo-para flex-container">
                                         <div class="shopping-card-products-photo">
                                             <div class="shopping-card-products-img">
-                                                <img src="assets/images/1662744659-jkerther-women-s-y2k-print-sweater-v-neck-long-sleeve-cardigan-1662744648.jpg" alt="clothes">
+                                                <img src="assets/images/<?php echo $values['items_image'] ?>" alt="<?php echo $values['items_name'] ?>">
                                             </div>
                                         </div>
                                         <div class="shopping-card-products-para">
-                                            <h4>Warm Clothes</h4>
-                                            <button type="submit">Remove</button>
+                                            <h4><?php echo $values['items_name'] ?></h4>
+                                            <button type="submit"><a href="shopping_card.php?active=delete&id=<?php echo $values['items_id']; ?>"><i class="fa-solid fa-trash"></i>Remove</a>
+                                            <?php 
+                                                if(isset($_GET['active'])) {
+                                                    if($_GET['active'] == "delete") {
+                                                        foreach($_SESSION['shopping_card'] as $keys => $values) {
+                                                            if($values['items_id'] == $_GET['id']) {
+                                                                unset($_SESSION['shopping_card'][$keys]);
+                                                                echo "<script>location.href='shopping_card.php'</script>";
+                                                            }
+                                                        }
+                                                    } 
+                                                }
+                                            ?>
+                                            </button>
                                         </div>
                                     </div>
                                     <div class="shopping-card-products-quantity flex-container">
-                                        <i class="fa-solid fa-square-minus"></i>
-                                        <p>1</p>
-                                        <i class="fa-solid fa-square-plus"></i>
+                                        <i class="fa-solid fa-square-minus minus" quantity-product-id="<?php echo $values['items_id']; ?>"></i>
+                                        <p class="quantity"><?php echo $values['items_quantity'] ?></p>
+                                        <i class="fa-solid fa-square-plus plus" quantity-product-id="<?php echo $values['items_id']; ?>"></i>
                                     </div>
                                     <div class="shopping-card-products-price">
-                                        <h4>20000Ks</h4>
+                                        <h4><?php echo $values['items_price'] ?>Ks</h4>
                                     </div>
                                     <div class="shopping-card-products-total">
-                                        <h4>Total Ks</h4>
+                                        <h4 class="total"><?php echo $total = number_format($values['items_quantity'] * $values['items_price']);?>Ks</h4>
                                     </div>
+                                    
                                 </div>
-                                <div class="shopping-card-products-lists flex-container">
-                                    <div class="shopping-card-products-photo-para flex-container">
-                                        <div class="shopping-card-products-photo">
-                                            <div class="shopping-card-products-img">
-                                                <img src="assets/images/1662744659-jkerther-women-s-y2k-print-sweater-v-neck-long-sleeve-cardigan-1662744648.jpg" alt="clothes">
-                                            </div>
-                                        </div>
-                                        <div class="shopping-card-products-para">
-                                            <h4>Warm Clothes</h4>
-                                            <button type="submit">Remove</button>
-                                        </div>
-                                    </div>
-                                    <div class="shopping-card-products-quantity flex-container">
-                                        <i class="fa-solid fa-square-minus"></i>
-                                        <p>1</p>
-                                        <i class="fa-solid fa-square-plus"></i>
-                                    </div>
-                                    <div class="shopping-card-products-price">
-                                        <h4>20000Ks</h4>
-                                    </div>
-                                    <div class="shopping-card-products-total">
-                                        <h4>Total Ks</h4>
-                                    </div>
-                                </div>
-                                <div class="shopping-card-products-lists flex-container">
-                                    <div class="shopping-card-products-photo-para flex-container">
-                                        <div class="shopping-card-products-photo">
-                                            <div class="shopping-card-products-img">
-                                                <img src="assets/images/1662744659-jkerther-women-s-y2k-print-sweater-v-neck-long-sleeve-cardigan-1662744648.jpg" alt="clothes">
-                                            </div>
-                                        </div>
-                                        <div class="shopping-card-products-para">
-                                            <h4>Warm Clothes</h4>
-                                            <button type="submit">Remove</button>
-                                        </div>
-                                    </div>
-                                    <div class="shopping-card-products-quantity flex-container">
-                                        <i class="fa-solid fa-square-minus"></i>
-                                        <p>1</p>
-                                        <i class="fa-solid fa-square-plus"></i>
-                                    </div>
-                                    <div class="shopping-card-products-price">
-                                        <h4>20000Ks</h4>
-                                    </div>
-                                    <div class="shopping-card-products-total">
-                                        <h4>Total Ks</h4>
-                                    </div>
-                                </div>
+                                <?php
+                                    }
+                                }
+                            ?>
                             </div>
-
                         </div>
                         <div class="shopping-card-summary">
                             <h3>ORDER SUMMARY</h3>
-                            <div class="shopping-card-summary-item-price flex-container">
-                                <h4>Items 2</h4>
-                                <h4>Total Ks</h4>
+                            <div class="shopping-card-summary-item-price">
+
+                                <h4>Items <?php echo $i; ?></h4>
                             </div>
+                            <?php 
+                            if(!empty($_SESSION['shopping_card'])) {
+                                $alltotal = 0;
+                                foreach($_SESSION['shopping_card'] as $keys => $values) {
+                                    
+                            ?>
+                            <div class="shopping-card-review flex-container">
+                                <h4><?php echo $values['items_name'] ?></h4>
+                                <h4><?php echo $values['items_price'];?> Ks</h4>
+                            </div>
+                            <?php 
+                                $alltotal += $values['items_price'];
+                            }
+                            }
+                            ?>
                             <div class="shopping-card-summary-total flex-container">
                                 <div class="shopping-card-summary-total-para">
                                     <h4>Total</h4>
                                 </div>
                                 <div class="shopping-card-summary-total-price">
-                                    <h4>Total Ks</h4>
+                                    <h4><?php echo $alltotal; ?> Ks</h4>
                                 </div>
                             </div>
                             <div class="checkout-button flex-container">
@@ -164,12 +182,13 @@ require_once "init/classes/Products.php";
                                     <button type="submit">Check Out</button>
                                 </div>
                                 <div class="removeall-btn">
-                                    <button type="submit">Remove All</button>
+                                    <i class="fa-solid fa-trash"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <?php?>
             </section>
         </main>
         <footer>
@@ -224,5 +243,6 @@ require_once "init/classes/Products.php";
         <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/3399965b27.js" crossorigin="anonymous"></script>
         <script src="assets/js/product_page.js"></script>
+        <script src="assets/js/shopping_card.js"></script>
     </body>
 </html>

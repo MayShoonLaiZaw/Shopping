@@ -1,4 +1,5 @@
 <?php 
+// header("Content-type:application/json");
 require_once "init/classes/Comments.php";
 require_once "init/classes/Products.php";
 $products = new Products;
@@ -6,8 +7,8 @@ $comments = new Comments;
 if($_GET['id'] == "") {
     echo "<script>location.href='index.php'</script>";
 }
-// echo $_GET['id'];
-foreach($comments->selectUser() as $user);
+foreach($comments->selectUser() as $user){}
+
     $getProducts = $products->fetchProducts($_GET["id"]);
 ?>
 
@@ -51,18 +52,12 @@ foreach($comments->selectUser() as $user);
                 </div>
                 <div class="account-icons">
                     <a href="sign_in.php"><i class="fa-solid fa-right-to-bracket"></i><a>
-                    <a href="shopping_card.php"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <a href="shopping_card.php"><i class="fa-solid fa-cart-shopping"></i><span id="card-num">0</span></a>
                 </div>
             </div>
         </header>
         <main>
             <section>
-            <div class="container">
-                <form method="post" id="comments-form" data-id='<?php echo $_GET['id'] ?>' data-user='<?php echo $user->username?>' data-image= '<?php echo $user->user_image; ?>'>
-                    <input type="text" id="comments"  placeholder="comments" name="comments">
-                    <button type="submit" name="submit" >Submit</button>
-                </form>
-            </div>
                 <div class="container">
                     <div class="productPage">
                         <div class="productCollections flex-container">
@@ -115,8 +110,8 @@ foreach($comments->selectUser() as $user);
                                     <div class="buy-button">
                                         <button type="submit">Buy Now</button>
                                     </div>
-                                    <div class="card-button">
-                                        <button type="submit">Add To Card</button>
+                                    <div class="card-button" id="add-card" data-card-id="<?php echo $_GET['id']; ?>" data-product-image = "<?php echo $getProducts->product_image; ?>" data-product-name="<?php echo $getProducts->product_name; ?>" data-product-price="<?php echo $getProducts->product_price; ?>">
+                                        <button type="submit" name="card">Add To Card</button>
                                     </div>
                                 </div>
                             </div>
@@ -162,88 +157,16 @@ foreach($comments->selectUser() as $user);
                     </div>
                     <div class="customer-reviews" id="customer-reviews">
                         <h3>Our Customers' Reviews</h3>
-                        <!-- <form method="post" id="comments_form">
+                        <form method="post" id="comments-form" data-id='<?php echo $_GET['id'];?>' data-user='<?php echo $user->username;?>' data-image='<?php echo $user->user_image; ?>'>
                             <div class="write-reviews flex-container">
-                                <input type="text" placeholder="Your Reviews" name="comments">
+                                <input type="text" placeholder="Your Reviews" id="comments">
                                 <div class="send-reviews">
-                                    <button type="submit" name="comment">Send Now</button>
+                                    <button type="submit" name="comment_btn">Send Now</button>
                                 </div>
                             </div>
-                        </form> -->
-                        <div class="customer-reviews-collections">
-                        <?php 
-                        $comments->insertComments($_POST);
-                        ?>
-                            <div class="customer-reviews-list flex-container">
-                                <div class="customer-reviews-photo">
-                                    <div class="customer-reviews-img">
-                                        <img src="assets/images/pexels-photo-2467401.jpg" alt="customer-photo">
-                                    </div>
-                                </div>
-                                <div class="customer-reviews-para">
-                                    <h4>Merry James</h4>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia delectus itaque nobis non facilis hic blanditiis doloremque voluptatibus unde modi officia, excepturi quo dolorem? Neque numquam alias eaque suscipit quam.</p>
-                                    <div class="customer-reviews-date">
-                                        <p>1 day ago</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="customer-reviews-list flex-container">
-                                <div class="customer-reviews-photo">
-                                    <div class="customer-reviews-img">
-                                        <img src="assets/images/pexels-photo-2467401.jpg" alt="customer-photo">
-                                    </div>
-                                </div>
-                                <div class="customer-reviews-para">
-                                    <h4>Merry James</h4>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia delectus itaque nobis non facilis hic blanditiis doloremque voluptatibus unde modi officia, excepturi quo dolorem? Neque numquam alias eaque suscipit quam.</p>
-                                    <div class="customer-reviews-date">
-                                        <p>1 day ago</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="customer-reviews-list flex-container">
-                                <div class="customer-reviews-photo">
-                                    <div class="customer-reviews-img">
-                                        <img src="assets/images/pexels-photo-2467401.jpg" alt="customer-photo">
-                                    </div>
-                                </div>
-                                <div class="customer-reviews-para">
-                                    <h4>Merry James</h4>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia delectus itaque nobis non facilis hic blanditiis doloremque voluptatibus unde modi officia, excepturi quo dolorem? Neque numquam alias eaque suscipit quam.</p>
-                                    <div class="customer-reviews-date">
-                                        <p>1 day ago</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="customer-reviews-list flex-container">
-                                <div class="customer-reviews-photo">
-                                    <div class="customer-reviews-img">
-                                        <img src="assets/images/pexels-photo-2467401.jpg" alt="customer-photo">
-                                    </div>
-                                </div>
-                                <div class="customer-reviews-para">
-                                    <h4>Merry James</h4>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia delectus itaque nobis non facilis hic blanditiis doloremque voluptatibus unde modi officia, excepturi quo dolorem? Neque numquam alias eaque suscipit quam.</p>
-                                    <div class="customer-reviews-date">
-                                        <p>1 day ago</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="customer-reviews-list flex-container">
-                                <div class="customer-reviews-photo">
-                                    <div class="customer-reviews-img">
-                                        <img src="assets/images/pexels-photo-2467401.jpg" alt="customer-photo">
-                                    </div>
-                                </div>
-                                <div class="customer-reviews-para">
-                                    <h4>Merry James</h4>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia delectus itaque nobis non facilis hic blanditiis doloremque voluptatibus unde modi officia, excepturi quo dolorem? Neque numquam alias eaque suscipit quam.</p>
-                                    <div class="customer-reviews-date">
-                                        <p>1 day ago</p>
-                                    </div>
-                                </div>
-                            </div>
+                        </form>
+                        <div class="customer-reviews-collections" id="reviews">
+                            
                         </div>
                     </div>
                     <div class="more-products" id="more-products">
@@ -334,5 +257,6 @@ foreach($comments->selectUser() as $user);
         <script src="https://kit.fontawesome.com/3399965b27.js" crossorigin="anonymous"></script>
         <script src="assets/js/product_page.js"></script>
         <script src="assets/js/comments.js"></script>
+        <script src="assets/js/shopping_card.js"></script>
     </body>
 </html>

@@ -17,6 +17,9 @@ body{
     justify-content: space-between;
 }
 /* header start */
+.mobile-view{
+    display: none;
+}
 .header{
     width: 100%;
     background: #FFD62E;
@@ -89,7 +92,7 @@ body{
 .account-icons a:hover{
     color: grey;
 }
-.account-icons a i{
+.account-icons  i{
     padding-left: 15px;
     font-size: 25px;
 }
@@ -763,3 +766,324 @@ body{
     padding-right: 15px;
 }
 /* footer end */
+.scroll-top i{
+    padding: 8px;
+    position: fixed;
+    z-index: 1;
+    right: 15px;
+    bottom: 15px;
+    font-size: 20px;
+    background: #FF8F00;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* responsive start */
+@media screen and (max-width: 750px) {
+    .scroll-top i{
+        padding: calc(16/750 *100vw);
+        right: calc(30/750 *100vw);
+        bottom: calc(30/750 *100vw);
+        font-size: calc(40/750 *100vw);
+        border-radius: calc(10/750 *100vw);
+    }
+    .container{
+        width: 100%;
+    }
+    .flex-container{
+        display: block;
+    }
+    p,button {
+        font-size:calc(25/750 *100vw);
+    }
+    h1{
+        font-size:calc(36/750 *100vw);
+    }
+    h2{
+        font-size: calc(34/750 *100vw);
+    }
+    h3{
+        font-size: calc(32/750 *100vw);
+    }
+    /* header start */
+    .mobile-view{
+        background: #FFD62E;
+        display: block;
+    }
+    .mobile-view .header-logo{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+    .mobile-view .logo-photo{
+        width: 50%;
+    }
+    .mobile-view .logo-icons{
+        width: 50%;
+        text-align: right;
+    }
+    .mobile-view .logo-icon{
+        width: 30%;
+    }
+    .nav{
+        width: 100%;
+        background: #FFD62E;
+    }
+    #nav .navbar{
+        width: 100%;
+    }
+    .nav .navbar li {
+        padding: 0 calc(40/750 *100vw);
+        height: calc(120/750 *100vw);
+        line-height: calc(120/750 *100vw);
+        width: 100%;
+        text-align: left;
+    }
+    .header .header-logo{
+        display: none;
+    }
+    /* header end */
+    /* aside-products start */
+    .aside-products{
+        width: 100%;
+    }
+    .aside{
+        display:none;
+    }
+    /* cloth-products start*/
+    .cloth-products{
+        width: 100%;
+    }
+    .search-input {
+        display: flex;
+    }
+    .search-input input {
+        width: 70%;
+        padding: calc(20/750 *100vw);
+    }
+    .search-btn {
+        width: 18%;
+    }
+    /* products-animation start */
+    .products-animation {
+        width: 100%;
+        padding: calc(20/750 *100vw) calc(10/750 *100vw);
+    }
+    .products-animation .next {
+        right: calc(20/750 *100vw);
+    }
+    .products-animation .prev {
+        left: calc(20/750 *100vw);
+    }
+    .products-slide{
+        display: flex;
+    }
+    .products-content p {
+        padding: calc(40/750 *100vw) 0;
+    }
+    .products-content-btn button {
+        padding: calc(16/750 *100vw) calc(24/750 *100vw);
+        background: #FFD62E;
+        border: none;
+    }
+    .products-slide .products-slide-image img {
+        height: calc(400/750 *100vw);
+    }
+    /* products-animation end */
+    /* products-show start */
+    .products-show {
+        width: 100%;
+        margin: calc(40/750 *100vw) 0;
+    }
+    .products-show1 {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        margin: calc(40/750 *100vw) 0;
+        padding: calc(40/750 *100vw);
+        box-shadow: 0px 0px calc(20/750 *100vw) #ececec;
+    }
+    .products-show-para h2 {
+        padding: calc(20/750 *100vw) 0 calc(40/750 *100vw);
+    }
+    .product-button button{
+        padding: calc(16/750 *100vw) calc(24/750 *100vw);
+    }
+    .products-show-img img {
+        height: calc(300/750 *100vw);
+    }
+    /* products-show end */
+    /* product-products-show start */
+    .popular-products {
+        padding: calc(40/750 *100vw);
+    }
+    .popular-products h2 {
+        padding-left: calc(30/750 *100vw);
+    }
+    .popular-products h2::before {
+        border: calc(2/750 *100vw) solid #FF8F00;
+        height:calc(40/750 *100vw);
+    }
+    .popular-products-shows {
+        display: flex;
+        flex-wrap: wrap;
+        margin: calc(20/750 *100vw) 0;
+    }
+    .popular-products-list {
+        box-shadow: 0px 0px calc(10/750 *100vw) #ececec;
+        margin: calc(20/750 *100vw) 0;
+    }
+    .popular-products-photo {
+        padding-top: calc(40/750 *100vw);
+    }
+    .popular-products-shows a {
+        width: 45%;
+        margin: 0 auto;
+    }
+    .popular-products-img img {
+        height: calc(400/750 *100vw);
+    }
+    .popular-products-para {
+        padding: calc(40/750 *100vw) 0px;
+    }
+    .popular-star {
+        padding: calc(20/750 *100vw) 0;
+    }
+    /* product-products-show end */
+    /* product-collections-gallery start */
+    .product-collections-gallery {
+        padding: calc(40/750 *100vw);
+    }
+    .product-collections-gallery h2 {
+        padding: calc(40/750 *100vw) 0;
+        padding-left: calc(30/750 *100vw);
+    }
+    .product-collections-gallery h2::before {
+        height: calc(40/750 *100vw);
+        border: calc(2/750 *100vw) solid #FF8F00;
+    }
+    .product-collections-gallery-list {
+        box-shadow: 0px 0px calc(20/750 *100vw) #ececec;
+        padding: calc(20/750 *100vw);
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .product-collections-gallery-list-show {
+        width: 18%;
+        text-align: center;
+        height: fit-content;
+    }
+    .product-collections-list1-img img {
+        width: 100%;
+        height: calc(160/750 *100vw);
+    }
+    .product-collections-list-para {
+        padding: 0;
+    }
+    .product-collections-list-para h3{
+        font-size: calc(18/750 *100vw);
+    }
+    /* product-collections-gallery end */
+    /* latest-products-gallery start */
+    .latest-products-gallery {
+        padding: calc(40/750 *100vw);
+    }
+    .latest-products-gallery h2 {
+        padding-left: calc(30/750 *100vw);
+        padding-bottom: calc(40/750 *100vw);
+    }
+    .latest-products-gallery h2::before {
+        border: calc(2/750 *100vw) solid #FF8F00;
+        height: calc(40/750 *100vw);
+    }
+    .latest-products-gallery-collections {
+        display: flex;
+        box-shadow: 0px 0px calc(20/750 *100vw) #ececec;
+        flex-wrap: wrap;
+    }
+    .latest-products-list {
+        width: 50%;
+        padding: calc(40/750 *100vw) calc(10/750 *100vw);
+    }
+    .latest-products-gallery-photo {
+        width: 80%;
+        margin: 0 auto;
+        height: calc(360/750 *100vw);
+    }
+    .latest-products-gallery-para {
+        width: 100%;
+        padding-top: calc(10/750 *100vw);
+    }
+    .latest-products-gallery-button {
+        width: 100%;
+        display: flex;
+        margin: calc(40/750 *100vw) auto;
+    }
+    .latest-products-gallery-btn button {
+        padding: calc(16/750 *100vw) calc(24/750 *100vw);
+    }
+    .latest-products-gallery-icon {
+        width: 20%;
+        margin-right: unset;
+    }
+    /* latest-products-gallery end */
+    /* our-brands start */
+    .our-brands {
+        width: 100%;
+        padding: calc(40/750 *100vw);
+    }
+    .our-brands h2 {
+        padding-left: calc(30/750 *100vw);
+        padding-bottom: calc(40/750 *100vw);
+    }
+    .our-brands h2::before {
+        height: calc(40/750 *100vw);
+        border: calc(2/750 *100vw) solid #FF8F00;
+    }
+    .brand-collections {
+        display: flex;
+        box-shadow: 0px 0px calc(20/750 *100vw) #ececec;
+        padding: calc(20/750 *100vw);
+    }
+    /* our-brands end */
+
+    /* cloth-products end*/
+    /* aside-products end */
+    /* summary start */
+    .summary {
+        padding: calc(40/750 *100vw);
+    }
+    .summary-collections {
+        display: flex;
+        flex-wrap: wrap;
+        padding-bottom: calc(50/750 *100vw);
+    }
+    .summary-list {
+        width: 30%;
+    }
+    .summary-list2, .summary-list3 {
+        width: 30%;
+    }
+    .summary-list4 {
+        width: 100%;
+    }
+    .summary-img {
+        width: 80%;
+    }
+    .summary-list p {
+        padding: calc(20/750 *100vw) 0 calc(40/750 *100vw);
+    }
+    .summary-list2 h3, .summary-list3 h3, .summary-list4 h3 {
+        padding: calc(40/750 *100vw) 0;
+    }
+    .summary-list2 ul li, .summary-list3 ul li {
+        line-height: calc(50/750 *100vw);
+        font-size:calc(25/750 *100vw); 
+    }
+    .summary-list4 ul li {
+        line-height: calc(60/750 *100vw);
+        font-size:calc(25/750 *100vw);
+    }
+    /* summary end */
+}
+/* responsive end */

@@ -1,13 +1,12 @@
 <?php
-spl_autoload_register(function($classes){
-    $paths = [
+session_start();
+spl_autoload_register(function($classes) {
+    $path = [
         "init/classes/$classes",
-        "init/abstract/$classes",
-        "init/interface/$classes"
     ];
-    foreach($paths as $value) {
+    foreach($path as $value) {
         if(file_exists($value)) {
-            return require_once $value;
+            require_once $value;
         }
     }
 })

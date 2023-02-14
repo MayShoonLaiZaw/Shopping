@@ -1,5 +1,6 @@
 <?php 
 session_start();
+
 require_once "init/classes/Products.php";
 if(isset($_POST['add_to_card'])) {
     if(isset($_SESSION['shopping_card'])) {
@@ -34,6 +35,9 @@ if(isset($_POST['add_to_card'])) {
 if(!isset($_SESSION['shopping_card']) ){
     echo "<script>location.href='index.php';</script>";
 }
+// if(!isset($_SESSION['email'])) {
+//     echo "<script>location.href='signIn.php'</script>";
+// }
 ?>
 
 <!DOCTYPE html>
@@ -45,30 +49,48 @@ if(!isset($_SESSION['shopping_card']) ){
         <link rel="stylesheet" href="./assets/css/shopping_card.css">
     </head>
     <body>
+        <div class="scroll-top">
+             <i class="fa-solid fa-arrow-up"></i>
+        </div>
         <header>
-            <div class="header flex-container">
-                <div class="header-logo flex-container">
-                    <div class="logo-icons">
-                        <i class="fa fa-bars"></i>
+            <div class="mobile-view">
+                <div class="header-logo">
+                    <div class="logo-photo">
+                        <div class="logo-icon">
+                            <img src="assets/images/da7854c889578743810e7970ae28671f.png" alt="logo-img">
+                        </div>          
                     </div>
+                    <div class="logo-icons">
+                        <i class="fa fa-bars" id="logo-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="header flex-container">
+                <div class="header-logo">
                     <div class="logo-photo">
                         <div class="logo-icon">
                             <img src="assets/images/da7854c889578743810e7970ae28671f.png" alt="logo-img">
                         </div>          
                     </div>
                 </div>
-                <div class="nav">
+                <div class="nav" id="nav">
                     <nav>
                         <ul class="navbar flex-container">
-                            <li><a href="index.php">Home</a></li>
-                            <li id="nav-drop"><a href="#">Popular</a></li>
-                            <li><a href="#">Reviews</a></li>
-                            <li><a href="#">Latest</a></li>
+                            <li><a href='index.php'>Home</a></li>
+                            <li><a href='#'>Popular</a></li>
+                            <li><a href='#'>Reviews</a></li>
+                            <li><a href='#'>Latest</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div class="account-icons">
-                    <a href="sign_in.php"><i class="fa-solid fa-right-to-bracket"></i></a>
+                <?php 
+                    if(isset($_SESSION['email'])) {
+                        ?>
+                        <i class="fa-solid fa-user"></i>                <?php
+                    }
+                ?>
+                    <a href="shopping_card.php"><i class="fa-solid fa-cart-shopping"></i></a>
                 </div>
             </div>
         </header>
@@ -148,48 +170,109 @@ if(!isset($_SESSION['shopping_card']) ){
                             ?>
                             </div>
                         </div>
-                        <div class="shopping-card-summary">
-                            <h3>ORDER SUMMARY</h3>
-                            <div class="shopping-card-summary-item-price">
+                        <div class="shopping-card-summary-list">
+                            <div class="shopping-card-summary">
+                                <h3>ORDER SUMMARY</h3>
+                                <div class="shopping-card-summary-item-price">
 
-                                <h4>Items <?php echo $i; ?></h4>
+                                    <h4>Items <?php echo $i; ?></h4>
+                                </div>
+                                <?php 
+                                if(!empty($_SESSION['shopping_card'])) {
+                                    $alltotal = 0;
+                                    foreach($_SESSION['shopping_card'] as $keys => $values) {
+                                        
+                                ?>
+                                <div class="shopping-card-review flex-container">
+                                    <h4><?php echo $values['items_name'] ?></h4>
+                                    <h4><?php echo $values['items_price'];?> Ks</h4>
+                                </div>
+                                <?php 
+                                    $alltotal += $values['items_price'];
+                                }
+                                }
+                                ?>
+                                <div class="shopping-card-summary-total flex-container">
+                                    <div class="shopping-card-summary-total-para">
+                                        <h4>Total</h4>
+                                    </div>
+                                    <div class="shopping-card-summary-total-price">
+                                        <h4><?php echo $alltotal; ?> Ks</h4>
+                                    </div>
+                                </div>
+                                <div class="checkout-button">
+                                    <div class="checkout-btn">
+                                        <?php
+                                        if(!isset($_SESSION['email'])) {
+                                        ?>
+
+                                            <button type='submit'><a href='signUp.php' id="checkout">Check Out</a></button>
+                                        <?php
+                                            } else {
+                                                ?>
+                                            <button type='submit' disabled>Check Out</button>
+                                        <?php
+                                            }
+                                        ?>
+                                    </div>
+                                </div>
                             </div>
-                            <?php 
-                            if(!empty($_SESSION['shopping_card'])) {
-                                $alltotal = 0;
-                                foreach($_SESSION['shopping_card'] as $keys => $values) {
-                                    
-                            ?>
-                            <div class="shopping-card-review flex-container">
-                                <h4><?php echo $values['items_name'] ?></h4>
-                                <h4><?php echo $values['items_price'];?> Ks</h4>
+                            <?php
+                            if(isset($_SESSION['email'])){
+                                ?>
+                                <div class="checkcard">
+                                <h3>Check Out</h3>
+                                <div class="choosepaycheck">
+                                    <form class='checkpay'>
+                                        <label for='wave'>
+                                            <div class="wave flex-container">
+                                                <div class="wave-input">
+                                                    <input type="checkbox" class='pay' value='1' id="wave">Wave Money
+                                                </div>
+                                                <div class="wave-photo" id="wave">
+                                                    <div class="wave-img">
+                                                        <img src="assets/images/unnamed.jpg" alt="wave-money">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </label>
+                                        <label for='kbz'>
+                                            <div class="kbz flex-container">
+                                                <div class="kbz-input">
+                                                    <input type="checkbox" class='pay' value='2' id="kbz">KBZ Pay
+                                                </div>
+                                                <div class="kbz-photo" id="kbz">
+                                                    <div class="kbz-img">
+                                                        <img src="assets/images/downloadkpay.png" alt="kbz-pay">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </label>
+                                        <label for='cb-bank'>
+                                            <div class="cb-bank flex-container">
+                                                <div class="cb-bank-input">
+                                                    <input type="checkbox" class='pay' value='3'  id="cb-bank">CB Bank
+                                                </div>
+                                                <div class="cb-bank-photo" id="cb-bank">
+                                                    <div class="cb-bank-img">
+                                                        <img src="assets/images/CB_Logo_.png" alt="cb-bank">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </form>
+                                    <button type="submit">Confirm & Pay</button>
+                                </div>
                             </div>
-                            <?php 
-                                $alltotal += $values['items_price'];
+                                <?php
                             }
-                            }
                             ?>
-                            <div class="shopping-card-summary-total flex-container">
-                                <div class="shopping-card-summary-total-para">
-                                    <h4>Total</h4>
-                                </div>
-                                <div class="shopping-card-summary-total-price">
-                                    <h4><?php echo $alltotal; ?> Ks</h4>
-                                </div>
-                            </div>
-                            <div class="checkout-button flex-container">
-                                <div class="checkout-btn">
-                                    <button type="submit">Check Out</button>
-                                </div>
-                                <div class="removeall-btn">
-                                    <i class="fa-solid fa-trash"></i>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
                 <?php?>
             </section>
+            
         </main>
         <footer>
             <div class="summary">
@@ -242,7 +325,7 @@ if(!isset($_SESSION['shopping_card']) ){
         </footer>
         <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/3399965b27.js" crossorigin="anonymous"></script>
-        <script src="assets/js/product_page.js"></script>
         <script src="assets/js/shopping_card.js"></script>
+        <script src='assets/js/product_page.js'></script>
     </body>
 </html>

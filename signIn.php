@@ -1,7 +1,8 @@
 <?php 
-    require_once "init/classes/Products.php";
-    $products = new Products;
-    $cate_name10 = $products->checkCategory2();
+    require_once "init/init.php";
+    require_once "init/classes/Auth.php";
+    $auth = new Auth;
+    $auth->sign_in($_POST);
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,7 +17,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4  offset-4">
-                    <div class="card my-5">
+                    <div class="card my-5 py-2">
                         <h1 class="text-center">Sign In</h1>
                         <div class="card-body">
                             <form method="post">
@@ -25,12 +26,18 @@
                                     <label for="email"><i class="fa-solid fa-envelope pe-2" style="font-size:20px;"></i>Email</label>
                                 </div>
                                 <div class="form-floating my-2">
-                                    <input type="password" class="form-control" id="password" name="password" placeholder='password'> 
-                                    <label for="password"><i class="fa-solid fa-lock pe-2" style="font-size:20px;"></i>Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder='password'>
+                                    <label for="password"><i class="fa-solid fa-lock pe-2" style="font-size:20px;"></i>Password </label>
                                 </div>
-                                <button type="submit" class="mt-2 align-end btn btn-warning">Sign In</button>
+                                <button type="submit" name="signin" class="mt-2 align-end btn btn-warning">Sign In</button>
                             </form>
                             <p class="mt-4">If you don't have any account,please <a href='signUp.php'>Sign Up</a></p>
+                            <div class="social text-center" style="cursor:pointer">
+                                <i class="fa-brands fa-facebook px-2" style='font-size: 25px;'></i>
+                                <i class="fa fa-twitter px-2" style='font-size: 25px;'></i>
+                                <i class="fa-brands fa-instagram px-2" style='font-size: 25px;'></i>
+
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,8 @@
 <?php 
-    require_once "init/classes/Products.php";
-    $products = new Products;
-    $cate_name10 = $products->checkCategory2();
+    require_once "init/init.php";
+    require_once "init/classes/Auth.php";
+    $auth = new Auth;
+    $auth->sign_up($_POST);
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,9 +17,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4  offset-4">
-                    <div class="card my-5">
+                    <div class="card my-5 py-2">
                         <h1 class="text-center">Sign Up</h1>
-                        <div class="card-body">
+                        <div class="card-body" >
                             <form method="post">
                                 <div class="form-floating my-2">
                                     <input type="text" class="form-control" id="username" name="username" placeholder='Username'> 
@@ -36,9 +37,15 @@
                                     <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder='confirm_password'> 
                                     <label for="confirm_password"><i class="fa-solid fa-key pe-2" style="font-size:20px;"></i>Confirm Password</label>
                                 </div>
-                                <button type="submit" class="mt-2 btn btn-warning">Sign Up</button>
+                                <button type="submit" name="signup" class="mt-2 btn btn-warning">Sign Up</button>
                             </form>
                             <p class="mt-4">If you already have an account,please <a href='signIn.php'>Sign In</a></p>
+                            <div class="social text-center" style="cursor:pointer">
+                                <i class="fa-brands fa-facebook px-2" style='font-size: 25px;'></i>
+                                <i class="fa fa-twitter px-2" style='font-size: 25px;'></i>
+                                <i class="fa-brands fa-instagram px-2" style='font-size: 25px;'></i>
+
+                            </div>
                         </div>
                     </div>
                 </div>

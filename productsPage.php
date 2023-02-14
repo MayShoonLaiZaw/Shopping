@@ -1,5 +1,5 @@
 <?php 
-// header("Content-type:application/json");
+require_once "init/init.php";
 require_once "init/classes/Comments.php";
 require_once "init/classes/Products.php";
 $products = new Products;
@@ -21,38 +21,48 @@ foreach($comments->selectUser() as $user){}
         <link rel="stylesheet" href="./assets/css/productsPage.css">
     </head>
     <body>
+        <div class="scroll-top">
+             <i class="fa-solid fa-arrow-up"></i>
+        </div>
         <header>
-            <div class="header flex-container">
-                <div class="header-logo flex-container">
-                    <div class="logo-icons">
-                        <i class="fa fa-bars"></i>
+            <div class="mobile-view">
+                <div class="header-logo">
+                    <div class="logo-photo">
+                        <div class="logo-icon">
+                            <img src="assets/images/da7854c889578743810e7970ae28671f.png" alt="logo-img">
+                        </div>          
                     </div>
+                    <div class="logo-icons">
+                        <i class="fa fa-bars" id="logo-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="header flex-container">
+                <div class="header-logo">
                     <div class="logo-photo">
                         <div class="logo-icon">
                             <img src="assets/images/da7854c889578743810e7970ae28671f.png" alt="logo-img">
                         </div>          
                     </div>
                 </div>
-                <div class="nav">
+                <div class="nav" id="nav">
                     <nav>
                         <ul class="navbar flex-container">
-                            <li><a href="index.php">Home</a></li>
-                            <li id="nav-drop"><a href="#">Popular<i class="fa-solid fa-angle-down"></i></a>
-                                <ul class="dropdown">
-                                    <li><a href="#">Clothes</a></li>
-                                    <li><a href="#">Shoes</a></li>
-                                    <li><a href="#">Hats</a></li>
-                                    <li><a href="#">Bags</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Reviews</a></li>
-                            <li><a href="#">Latest</a></li>
+                            <li><a href='index.php'>Home</a></li>
+                            <li><a href='#'>Popular</a></li>
+                            <li><a href='#'>Reviews</a></li>
+                            <li><a href='#'>Latest</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div class="account-icons">
-                    <a href="sign_in.php"><i class="fa-solid fa-right-to-bracket"></i><a>
-                    <a href="shopping_card.php"><i class="fa-solid fa-cart-shopping"></i><span id="card-num">0</span></a>
+                <?php 
+                    if(isset($_SESSION['email'])) {
+                        ?>
+                        <i class="fa-solid fa-user"></i>                <?php
+                    }
+                ?>
+                    <a href="shopping_card.php"><i class="fa-solid fa-cart-shopping"></i></a>
                 </div>
             </div>
         </header>
@@ -110,8 +120,14 @@ foreach($comments->selectUser() as $user){}
                                     <div class="buy-button">
                                         <button type="submit">Buy Now</button>
                                     </div>
-                                    <div class="card-button" id="add-card" data-card-id="<?php echo $_GET['id']; ?>" data-product-image = "<?php echo $getProducts->product_image; ?>" data-product-name="<?php echo $getProducts->product_name; ?>" data-product-price="<?php echo $getProducts->product_price; ?>">
-                                        <button type="submit" name="card">Add To Card</button>
+                                    <div class="card-button">
+                                        <form method="post" action="shopping_card.php?action=add&id=<?php echo $getProducts->id; ?>">
+                                            <input type="hidden" name="quantity" value="1">
+                                            <input type="hidden" name="hidden_name" value="<?php echo $getProducts->product_name; ?>">
+                                            <input type="hidden" name="hidden_image" value="<?php echo $getProducts->product_image; ?>">
+                                            <input type="hidden" name="hidden_price" value="<?php echo $getProducts->product_price; ?>">
+                                            <button type="submit" class="add-card" name="add_to_card" value="Add To Card">Add To Card</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -257,6 +273,5 @@ foreach($comments->selectUser() as $user){}
         <script src="https://kit.fontawesome.com/3399965b27.js" crossorigin="anonymous"></script>
         <script src="assets/js/product_page.js"></script>
         <script src="assets/js/comments.js"></script>
-        <script src="assets/js/shopping_card.js"></script>
     </body>
 </html>

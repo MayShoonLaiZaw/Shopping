@@ -1,4 +1,5 @@
-<?php 
+<?php
+    require_once "init/init.php";
     require_once "init/classes/Products.php";
     $products = new Products;
     $cate_name10 = $products->checkCategory2();
@@ -11,31 +12,48 @@
         <title>Shopping</title>
         <link rel="stylesheet" href="./assets/css/index.css">
     </head>
-    <body>
+    <body id="home">
+        <div class="scroll-top">
+             <i class="fa-solid fa-arrow-up"></i>
+        </div>
         <header>
-            <div class="header flex-container">
-                <div class="header-logo flex-container">
-                    <div class="logo-icons">
-                        <i class="fa fa-bars"></i>
+            <div class="mobile-view">
+                <div class="header-logo">
+                    <div class="logo-photo">
+                        <div class="logo-icon">
+                            <img src="assets/images/da7854c889578743810e7970ae28671f.png" alt="logo-img">
+                        </div>          
                     </div>
+                    <div class="logo-icons">
+                        <i class="fa fa-bars" id="logo-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="header flex-container">
+                <div class="header-logo">
                     <div class="logo-photo">
                         <div class="logo-icon">
                             <img src="assets/images/da7854c889578743810e7970ae28671f.png" alt="logo-img">
                         </div>          
                     </div>
                 </div>
-                <div class="nav">
+                <div class="nav" id="nav">
                     <nav>
                         <ul class="navbar flex-container">
-                            <li><a href="index.php">Home</a></li>
-                            <li><a href="#">Popular</a></li>
-                            <li><a href="#">Reviews</a></li>
-                            <li><a href="#">Latest</a></li>
+                            <li id="home-btn">Home</li>
+                            <li id="popular-btn">Popular</li>
+                            <li id="review-btn">Reviews</li>
+                            <li id="latest-btn">Latest</li>
                         </ul>
                     </nav>
                 </div>
                 <div class="account-icons">
-                    <a href="sign_in.php"><i class="fa-solid fa-right-to-bracket"></i><a>
+                <?php 
+                    if(isset($_SESSION['email'])) {
+                        ?>
+                        <i class="fa-solid fa-user"></i>                <?php
+                    }
+                ?>
                     <a href="shopping_card.php"><i class="fa-solid fa-cart-shopping"></i></a>
                 </div>
             </div>
@@ -44,20 +62,6 @@
             <section>
                 <div class="aside-products flex-container">
                     <div class="aside">
-                        <div class="category">
-                            <h2>Category</h2>
-                            <div class="category-parts">
-                                <ul class="category-lists">
-                                    <?php
-                                        foreach($products->checkCategory() as $cate_name) {
-                                    ?>
-                                        <li><a href="#cate-<?php echo $cate_name->id; ?>"><?php echo $cate_name->category_name; ?></a></li>
-                                    <?php
-                                        }
-                                    ?>
-                                </ul>
-                            </div>
-                        </div>
                         <div class="clothes-special">
                             <?php foreach($products->showSpecial($cate_name10->category_name) as $product_special) {
                             
@@ -328,7 +332,6 @@
                         </div>
                         <div class="products-show flex-container">
                             <?php
-                            // foreach($products->checkCategory() as $cate_name2) {
                                 foreach ($products->showProductsfirst($cate_name10->category_name) as $products2){
                             ?>
                                 <div class="products-show1 flex-container">
@@ -349,10 +352,9 @@
                                 </div>
                             <?php
                                 }
-                            // }
                             ?>
                         </div>
-                        <div class="popular-products">
+                        <div class="popular-products" id="popular">
                             <h2>Popular Products For You</h2>
                             <div class="popular-products-shows flex-container">
                                 <?php foreach ($products->showProductseight($cate_name10->category_name) as $products8) {
@@ -443,7 +445,7 @@
                                 ?>
                             </div>
                         </div>
-                        <div class="latest-products-gallery">
+                        <div class="latest-products-gallery" id="latest">
                             <h2>Latest Products</h2>
                             <div class="latest-products-gallery-collections flex-container">
                             <?php foreach($products->showProductsfour($cate_name10->category_name) as $productLatest) {
@@ -791,9 +793,6 @@
                     </div>
                     
                 </div>
-                <?php
-                    // }
-                ?>
             </section>
         </main>
         <footer>

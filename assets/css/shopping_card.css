@@ -17,6 +17,9 @@ body{
     justify-content: space-between;
 }
 /* header start */
+.mobile-view{
+    display: none;
+}
 .header{
     width: 100%;
     background: #FFD62E;
@@ -89,7 +92,7 @@ body{
 .account-icons a:hover{
     color: grey;
 }
-.account-icons a i{
+.account-icons  i{
     padding-left: 15px;
     font-size: 25px;
 }
@@ -171,10 +174,10 @@ body{
     padding: 5px 20px;
     color: #F00;
     border:none;
+    background: none;
 }
 .shopping-card-products-para button:hover{
     cursor: pointer;
-    box-shadow: 0px 0px 5px #333;
 }
 .shopping-card-products-img{
     width: 100%;
@@ -218,10 +221,14 @@ body{
     padding-right: 10px;
 }
 /* shopping-card-products end */
-.shopping-card-summary{
-    width: 20%;
-    padding: 20px;
+.shopping-card-summary-list{
+    width: 25%;
     height: fit-content;
+}
+.shopping-card-summary,.checkcard{
+    padding: 20px;
+    margin: 20px 0;
+    width: 100%;
     box-shadow: 0px 0px 5px #333;
 }
 .shopping-card-summary h3{
@@ -258,19 +265,17 @@ body{
     width: 100%;
 }
 .checkout-button button{
-    padding: 10px 20px;
+    /* padding: 10px 20px; */
+    width: 100%;
+    padding: 15px 0;
+    font-weight: bolder;
+    text-transform: uppercase;
     border:none;
     background: #FFD62E;
 }
-.removeall-btn button{
-    background: #f00;
-}
-.removeall-btn i{
-    font-size: 25px;
-    color: #f00;
-}
-.removeall-btn i:hover{
+.checkout-button button:hover{
     cursor: pointer;
+
 }
 .shopping-card-review{
     padding: 10px 0;
@@ -279,7 +284,49 @@ a{
     text-decoration: none;
     color: #333;
 }
+.choosepaycheck{
+    width: 100%;
+}
+.choosepaycheck form{
+    border-bottom: 3px solid #ececec;
+}
+.cb-bank,.kbz,.wave{
+    width: 100%;
+    margin: 20px 0;
+    align-items: center;
+}
+.cb-bank-input,.kbz-input,.wave-input{
+    width: 70%;
+}
+.cb-bank-input input,.kbz-input input,.wave-input input {
+    margin-right: 10px;
+}
+.cb-bank-photo,.kbz-photo,.wave-photo{
+    width: 20%;
+}
+.cb-bank-img,.kbz-img,.wave-img{
+    width: 100%;
+    line-height: 0;
+}
+.cb-bank-img img,.kbz-img img,.wave-img img{
+    width: 100%;
+}
+.cb-bank:hover,.kbz:hover,.wave:hover{
+    cursor:pointer;
+}
+.choosepaycheck button{
+    width: 100%;
+    padding: 15px 0;
+    font-weight: bolder;
+    text-transform: uppercase;
+    background: #FFD62E;
+    border:none;
+}
+.choosepaycheck button:hover{
+    cursor: pointer;
+}
 /* shopping-card end */
+
 /* footer start */
 .summary{
     z-index: -1;
@@ -336,3 +383,219 @@ a{
     padding-right: 15px;
 }
 /* footer end */
+.scroll-top i{
+    padding: 8px;
+    position: fixed;
+    z-index: 1;
+    right: 15px;
+    bottom: 15px;
+    font-size: 20px;
+    background: #FF8F00;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* responsive start */
+@media screen and (max-width: 750px) {
+    .scroll-top i{
+        padding: calc(16/750 *100vw);
+        right: calc(30/750 *100vw);
+        bottom: calc(30/750 *100vw);
+        font-size: calc(40/750 *100vw);
+        border-radius: calc(10/750 *100vw);
+    }
+    .container{
+        width: 100%;
+        padding: calc(20/750 *100vw);
+    }
+    .flex-container{
+        display: block;
+    }
+    h4,p,button {
+        font-size:calc(25/750 *100vw);
+    }
+    h1{
+        font-size:calc(36/750 *100vw);
+    }
+    h2{
+        font-size: calc(34/750 *100vw);
+    }
+    h3{
+        font-size: calc(32/750 *100vw);
+    }
+    /* header start */
+    .mobile-view{
+        background: #FFD62E;
+        display: block;
+    }
+    .mobile-view .header-logo{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+    .mobile-view .logo-photo{
+        width: 50%;
+    }
+    .mobile-view .logo-icons{
+        width: 50%;
+        text-align: right;
+    }
+    .mobile-view .logo-icon{
+        width: 30%;
+    }
+    .nav{
+        width: 100%;
+        background: #FFD62E;
+    }
+    #nav .navbar{
+        width: 100%;
+    }
+    .nav .navbar li {
+        padding: 0 calc(40/750 *100vw);
+        height: calc(120/750 *100vw);
+        line-height: calc(120/750 *100vw);
+        width: 100%;
+        text-align: left;
+    }
+    .header .header-logo{
+        display: none;
+    }
+    /* header end */
+    /* shopping-card start */
+    .shopping-card {
+        width: 100%;
+        padding: calc(60/750 *100vw) 0;
+    }
+    .shopping-card-collections {
+        width: 100%;
+    }
+    .shopping-card-lists-para {
+        width: 100%;
+    }
+    .shopping-card-lists::after {
+        border: calc(2/750 *100vw) solid #ececec;
+    }
+    .shopping-card-header-lists {
+        padding: calc(40/750 *100vw) 0;
+    }
+    .shopping-card-header-lists ul li:first-child {
+        width: calc(350/750 *100vw);
+    }
+    .shopping-card-header-lists ul li {
+        width: calc(200/750 *100vw);
+        font-size:calc(25/750 *100vw);
+    }
+    .shopping-card-products-lists {
+        padding: 0;
+        box-shadow: 0px 0px calc(10/750 *100vw) #ececec;
+        display: flex;
+        margin-bottom: calc(60/750 *100vw);
+    }
+    .shopping-card-products-photo-para {
+        width: 30%;
+    }
+    .shopping-card-products-photo {
+        width: 100%;
+    }
+    .shopping-card-products-para {
+        width: 100%;
+    }
+    .shopping-card-products-para button {
+        margin-top: calc(60/750 *100vw);
+    }
+    .shopping-card-products-para  h4{
+        text-align: center;
+        padding: calc(20/750 *100vw) 0;
+    }
+    .shopping-card-products-quantity {
+        width: 18%;
+        height: 30px;
+    }
+    .shopping-card-products-price {
+        width: 18%;
+    }
+    .shopping-card-products-total {
+        width: 18%;
+    }
+    .shopping-card-summary {
+        width: 100%;
+        padding: calc(40/750 *100vw);
+        box-shadow: 0px 0px calc(10/750 *100vw) #333;
+    }
+    .shopping-card-summary-list {
+        width: 100%;
+    }
+    .shopping-card-summary h3 {
+        padding-bottom: calc(40/750 *100vw);
+    }
+    .shopping-card-summary h3::after {
+        border: calc(2/750 *100vw) solid #ececec;
+    }
+    .shopping-card-summary-item-price {
+        padding: calc(40/750 *100vw) 0;
+    }
+    .shopping-card-summary-item-price::after {
+        border: calc(2/750 *100vw) solid #ececec;
+    }
+    .shopping-card-review {
+        display: flex;
+        padding: calc(20/750 *100vw) 0;
+    }
+    .shopping-card-summary-total {
+        display:flex;
+        padding: calc(40/750 *100vw) 0;
+        border-top: calc(2/750 *100vw) solid #ececec;
+    }
+    .checkout-button {
+        display: flex;
+    }
+    .checkout-button button {
+        padding: calc(16/750 *100vw) calc(24/750 *100vw);
+    }
+    .wave,.kbz,.cb-bank{
+        display: flex;
+        margin: calc(40/750 *100vw) 0;
+    }
+    .cb-bank-input input, .kbz-input input, .wave-input input {
+        margin-right: calc(20/750 *100vw);
+    }
+    
+    /* shopping-card end */
+    /* summary start */
+    .summary {
+        padding: calc(40/750 *100vw);
+    }
+    .summary-collections {
+        display: flex;
+        flex-wrap: wrap;
+        padding-bottom: calc(50/750 *100vw);
+    }
+    .summary-list {
+        width: 30%;
+    }
+    .summary-list2, .summary-list3 {
+        width: 30%;
+    }
+    .summary-list4 {
+        width: 100%;
+    }
+    .summary-img {
+        width: 80%;
+    }
+    .summary-list p {
+        padding: calc(20/750 *100vw) 0 calc(40/750 *100vw);
+    }
+    .summary-list2 h3, .summary-list3 h3, .summary-list4 h3 {
+        padding: calc(40/750 *100vw) 0;
+    }
+    .summary-list2 ul li, .summary-list3 ul li {
+        line-height: calc(50/750 *100vw);
+        font-size:calc(25/750 *100vw); 
+    }
+    .summary-list4 ul li {
+        line-height: calc(60/750 *100vw);
+        font-size:calc(25/750 *100vw);
+    }
+    /* summary end */
+}
+/* responsive end */
